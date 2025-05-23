@@ -87,28 +87,26 @@ const themes = [
     "chartLineColor": "#64748B",
     "chartFillColor": "rgba(100, 116, 139, 0.1)"
   }
-]
+];
 
-
-;
+window.currentChosenTheme = themes[0];
 function applyTheme(theme) {
     const rootStyle = document.documentElement.style;
     rootStyle.setProperty('--accent', theme.accent);
     rootStyle.setProperty('--accent-hover', theme.accentHover);
+
     const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const disabledColor = isDark ? theme.accentDisabledDark : theme.accentDisabled;
     rootStyle.setProperty('--accent-disabled', disabledColor);
+
     rootStyle.setProperty('--result-gradient-from', theme.resultGradientFrom);
     rootStyle.setProperty('--result-gradient-to', theme.resultGradientTo);
 }
 
-function applyThemeBasedOnSecond() {
-    const now = new Date();
-    const second = now.getSeconds();
-    const themeIndex = second % themes.length;
-    const selectedTheme = themes[themeIndex];
-    window.currentChosenTheme = selectedTheme;
-    applyTheme(selectedTheme);
+function selectAndApplyRandomTheme() {
+    const randomIndex = Math.floor(Math.random() * themes.length);
+    window.currentChosenTheme = themes[randomIndex];
+    applyTheme(window.currentChosenTheme);
 }
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
@@ -118,8 +116,4 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
         const newDisabled = e.matches ? theme.accentDisabledDark : theme.accentDisabled;
         rootStyle.setProperty('--accent-disabled', newDisabled);
     }
-});
-
-window.addEventListener('load', () => {
-    applyThemeBasedOnSecond(); // veya selectAndApplyRandomTheme();
 });
