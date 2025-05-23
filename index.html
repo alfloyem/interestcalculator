@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Compound Interest Calculator</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="language-selector">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="tr">Türkçe</option>
+            <option value="az">Azərbaycanca</option>
+            <option value="ru">Русский</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <div class="calculator-section">
+                <div class="input-group">
+                    <label for="years" data-translate="years_label">Investment Period</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="number"
+                            id="years"
+                            value=""
+                            min="1"
+                            max="50"
+                            placeholder="1"
+                            data-full-value=""
+                        />
+                        <button
+                            type="button"
+                            class="view-full-number-btn"
+                            data-translate-aria="view_full_number_label"
+                        >
+                            ...
+                        </button>
+                        <span class="percentage-symbol" data-translate="years_unit">years</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="interest" data-translate="interest_label">Annual Interest Rate</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="number"
+                            id="interest"
+                            value=""
+                            min="0.1"
+                            max="50"
+                            step="0.1"
+                            class="percentage-input"
+                            placeholder="1.0"
+                            data-full-value=""
+                        />
+                        <button
+                            type="button"
+                            class="view-full-number-btn"
+                            data-translate-aria="view_full_number_label"
+                        >
+                            ...
+                        </button>
+                        <span class="percentage-symbol">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="money" data-translate="monthly_label">Monthly Contribution</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol" id="currencySymbol">$</span>
+                        <input
+                            type="number"
+                            id="money"
+                            value=""
+                            min="1"
+                            class="currency-input"
+                            placeholder="100"
+                            data-full-value=""
+                        />
+                        <button
+                            type="button"
+                            class="view-full-number-btn"
+                            data-translate-aria="view_full_number_label"
+                        >
+                            ...
+                        </button>
+                    </div>
+                </div>
+
+                <button
+                    class="calculate-btn"
+                    id="calculateBtn"
+                    onclick="calculate()"
+                    data-translate="calculate_btn"
+                    disabled
+                >
+                    Calculate Growth
+                </button>
+
+                <div id="result-section" class="result-section" style="display: none;">
+                    <div class="result-title">
+                        <span data-translate="result_title">Total Value After</span>
+                        <span id="result-years"></span>
+                        <span data-translate="years_unit_suffix">years</span>
+                    </div>
+                    <div class="result-amount" id="result-amount">$0</div>
+                    <div class="result-details">
+                        <div class="result-item">
+                            <div class="result-item-title" data-translate="contributions_title">
+                                Total Contributions
+                            </div>
+                            <div class="result-item-value" id="total-contributions">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-item-title" data-translate="interest_title">
+                                Interest Earned
+                            </div>
+                            <div class="result-item-value" id="interest-earned">$0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-section" id="chartSection">
+                <h3 class="chart-title" data-translate="chart_title">
+                    Investment Growth Over Time
+                </h3>
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fullNumberModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="fullNumberModalTitle" data-translate="full_number_modal_title">
+                Full Number
+            </h3>
+            <p id="fullNumberDisplay"></p>
+            <button id="closeFullNumberModalBtn" data-translate="close_btn">Close</button>
+        </div>
+    </div>
+
+    <!-- Toast container (injected by JS) -->
+
+    <!-- Load external JS files in correct order -->
+    <script src="theme.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
