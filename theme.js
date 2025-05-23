@@ -1,160 +1,102 @@
-// theme.js
-//  - Defines multiple color themes
-//  - Exposes applyTheme() and selectAndApplyRandomTheme() for use in main.js
-//  - Handles updating CSS variables for accent colors based on light/dark mode
-
 const themes = [
-    {
-        name: 'Ocean Blue',
-        accent: '#3B82F6',
-        accentHover: '#2563EB',
-        accentDisabled: '#93C5FD',
-        accentDisabledDark: '#2563EB',
-        resultGradientFrom: '#3B82F6',
-        resultGradientTo: '#1D4ED8',
-        chartLineColor: '#3B82F6',
-        chartFillColor: 'rgba(59, 130, 246, 0.1)',
-    },
-    {
-        name: 'Sky Blue',
-        accent: '#60A5FA',
-        accentHover: '#3B82F6',
-        accentDisabled: '#BFDBFE',
-        accentDisabledDark: '#3B82F6',
-        resultGradientFrom: '#60A5FA',
-        resultGradientTo: '#2563EB',
-        chartLineColor: '#60A5FA',
-        chartFillColor: 'rgba(96, 165, 250, 0.1)',
-    },
-    {
-        name: 'Forest Green',
-        accent: '#10B981',
-        accentHover: '#059669',
-        accentDisabled: '#6EE7B7',
-        accentDisabledDark: '#059669',
-        resultGradientFrom: '#10B981',
-        resultGradientTo: '#047857',
-        chartLineColor: '#10B981',
-        chartFillColor: 'rgba(16, 185, 129, 0.1)',
-    },
-    {
-        name: 'Mint Green',
-        accent: '#34D399',
-        accentHover: '#10B981',
-        accentDisabled: '#A7F3D0',
-        accentDisabledDark: '#10B981',
-        resultGradientFrom: '#34D399',
-        resultGradientTo: '#059669',
-        chartLineColor: '#34D399',
-        chartFillColor: 'rgba(52, 211, 153, 0.1)',
-    },
-    {
-        name: 'Royal Purple',
-        accent: '#8B5CF6',
-        accentHover: '#7C3AED',
-        accentDisabled: '#C4B5FD',
-        accentDisabledDark: '#7C3AED',
-        resultGradientFrom: '#8B5CF6',
-        resultGradientTo: '#6D28D9',
-        chartLineColor: '#8B5CF6',
-        chartFillColor: 'rgba(139, 92, 246, 0.1)',
-    },
-    {
-        name: 'Lavender Purple',
-        accent: '#A78BFA',
-        accentHover: '#8B5CF6',
-        accentDisabled: '#DDD6FE',
-        accentDisabledDark: '#8B5CF6',
-        resultGradientFrom: '#A78BFA',
-        resultGradientTo: '#7C3AED',
-        chartLineColor: '#A78BFA',
-        chartFillColor: 'rgba(167, 139, 250, 0.1)',
-    },
-    {
-        name: 'Sunset Orange',
-        accent: '#F97316',
-        accentHover: '#EA580C',
-        accentDisabled: '#FDBA74',
-        accentDisabledDark: '#EA580C',
-        resultGradientFrom: '#F97316',
-        resultGradientTo: '#C2410C',
-        chartLineColor: '#F97316',
-        chartFillColor: 'rgba(249, 115, 22, 0.1)',
-    },
-    {
-        name: 'Peach Orange',
-        accent: '#FB923C',
-        accentHover: '#F97316',
-        accentDisabled: '#FED7AA',
-        accentDisabledDark: '#F97316',
-        resultGradientFrom: '#FB923C',
-        resultGradientTo: '#EA580C',
-        chartLineColor: '#FB923C',
-        chartFillColor: 'rgba(251, 146, 60, 0.1)',
-    },
-    {
-        name: 'Rose Pink',
-        accent: '#EC4899',
-        accentHover: '#DB2777',
-        accentDisabled: '#F9A8D4',
-        accentDisabledDark: '#DB2777',
-        resultGradientFrom: '#EC4899',
-        resultGradientTo: '#BE185D',
-        chartLineColor: '#EC4899',
-        chartFillColor: 'rgba(236, 72, 153, 0.1)',
-    },
-    {
-        name: 'Fuchsia Pink',
-        accent: '#D946EF',
-        accentHover: '#C026D3',
-        accentDisabled: '#F0ABFC',
-        accentDisabledDark: '#C026D3',
-        resultGradientFrom: '#D946EF',
-        resultGradientTo: '#A21CAF',
-        chartLineColor: '#D946EF',
-        chartFillColor: 'rgba(217, 70, 239, 0.1)',
-    },
-    {
-        name: 'Teal Cyan',
-        accent: '#14B8A6',
-        accentHover: '#0D9488',
-        accentDisabled: '#5EEAD4',
-        accentDisabledDark: '#0D9488',
-        resultGradientFrom: '#14B8A6',
-        resultGradientTo: '#0F766E',
-        chartLineColor: '#14B8A6',
-        chartFillColor: 'rgba(20, 184, 166, 0.1)',
-    },
-    {
-        name: 'Light Cyan',
-        accent: '#2DD4BF',
-        accentHover: '#14B8A6',
-        accentDisabled: '#99F6E4',
-        accentDisabledDark: '#14B8A6',
-        resultGradientFrom: '#2DD4BF',
-        resultGradientTo: '#0D9488',
-        chartLineColor: '#2DD4BF',
-        chartFillColor: 'rgba(45, 212, 191, 0.1)',
-    },
+  {
+    "name": "True Red",
+    "accent": "#DC2626",
+    "accentHover": "#B91C1C",
+    "accentDisabled": "#FCA5A5",
+    "accentDisabledDark": "#B91C1C",
+    "resultGradientFrom": "#DC2626",
+    "resultGradientTo": "#991B1B",
+    "chartLineColor": "#DC2626",
+    "chartFillColor": "rgba(220, 38, 38, 0.1)"
+  },
+  {
+    "name": "Tomato Fire",
+    "accent": "#C03B3B",
+    "accentHover": "#9B2C2C",
+    "accentDisabled": "#FECACA",
+    "accentDisabledDark": "#EF4444",
+    "resultGradientFrom": "#C03B3B",
+    "resultGradientTo": "#7B1212",
+    "chartLineColor": "#C03B3B",
+    "chartFillColor": "rgba(192, 59, 59, 0.1)"
+  },
+  {
+    "name": "Mint Fresh",
+    "accent": "#3EBE86",
+    "accentHover": "#2E9365",
+    "accentDisabled": "#D1FAE5",
+    "accentDisabledDark": "#6EE7B7",
+    "resultGradientFrom": "#3EBE86",
+    "resultGradientTo": "#207A51",
+    "chartLineColor": "#3EBE86",
+    "chartFillColor": "rgba(62, 190, 134, 0.1)"
+  },
+  {
+    "name": "Evergreen",
+    "accent": "#065F46",
+    "accentHover": "#064E3B",
+    "accentDisabled": "#99F6E4",
+    "accentDisabledDark": "#064E3B",
+    "resultGradientFrom": "#065F46",
+    "resultGradientTo": "#022C22",
+    "chartLineColor": "#065F46",
+    "chartFillColor": "rgba(6, 95, 70, 0.1)"
+  },
+  {
+    "name": "Sky Frost",
+    "accent": "#2C7ABF",
+    "accentHover": "#205F8F",
+    "accentDisabled": "#E0F2FE",
+    "accentDisabledDark": "#38BDF8",
+    "resultGradientFrom": "#2C7ABF",
+    "resultGradientTo": "#0B3C5E",
+    "chartLineColor": "#2C7ABF",
+    "chartFillColor": "rgba(44, 122, 191, 0.1)"
+  },
+  {
+    "name": "Deep Ocean",
+    "accent": "#1E3A8A",
+    "accentHover": "#1E40AF",
+    "accentDisabled": "#C7D2FE",
+    "accentDisabledDark": "#1E40AF",
+    "resultGradientFrom": "#1E3A8A",
+    "resultGradientTo": "#172554",
+    "chartLineColor": "#1E3A8A",
+    "chartFillColor": "rgba(30, 58, 138, 0.1)"
+  },
+  {
+    "name": "Violet Royal",
+    "accent": "#5B3BC6",
+    "accentHover": "#472FA0",
+    "accentDisabled": "#DDD6FE",
+    "accentDisabledDark": "#7C3AED",
+    "resultGradientFrom": "#5B3BC6",
+    "resultGradientTo": "#3F27A0",
+    "chartLineColor": "#5B3BC6",
+    "chartFillColor": "rgba(91, 59, 198, 0.1)"
+  },
+  {
+    "name": "Rose Bloom",
+    "accent": "#9E1E30",
+    "accentHover": "#7A1624",
+    "accentDisabled": "#FECDD3",
+    "accentDisabledDark": "#E11D48",
+    "resultGradientFrom": "#9E1E30",
+    "resultGradientTo": "#5A0E18",
+    "chartLineColor": "#9E1E30",
+    "chartFillColor": "rgba(158, 30, 48, 0.1)"
+  }
 ];
 
-// Expose the chosen theme globally so main.js can read/write
 window.currentChosenTheme = themes[0];
 
-/**
- * applyTheme(theme)
- * -----------------
- * Sets CSS custom properties (--accent, --accent-hover, --accent-disabled, --result-gradient-*)
- * based on the passed-in theme object. Automatically adapts to light/dark mode for --accent-disabled.
- */
 function applyTheme(theme) {
     const rootStyle = document.documentElement.style;
     rootStyle.setProperty('--accent', theme.accent);
     rootStyle.setProperty('--accent-hover', theme.accentHover);
 
-    // Detect if the user is in dark mode
     const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    // Choose the appropriate disabled color
     const disabledColor = isDark ? theme.accentDisabledDark : theme.accentDisabled;
     rootStyle.setProperty('--accent-disabled', disabledColor);
 
@@ -162,19 +104,16 @@ function applyTheme(theme) {
     rootStyle.setProperty('--result-gradient-to', theme.resultGradientTo);
 }
 
-/**
- * selectAndApplyRandomTheme()
- * ---------------------------
- * Picks one of the themes[] at random, stores it in window.currentChosenTheme, 
- * and then calls applyTheme() to update the CSS variables.
- */
-function selectAndApplyRandomTheme() {
-    const randomIndex = Math.floor(Math.random() * themes.length);
-    window.currentChosenTheme = themes[randomIndex];
-    applyTheme(window.currentChosenTheme);
+function applyThemeBasedOnSecond() {
+    const now = new Date();
+    const second = now.getSeconds();
+    const themeCount = themes.length;
+    const themeIndex = second % themeCount;
+    const selectedTheme = themes[themeIndex];
+    window.currentChosenTheme = selectedTheme;
+    applyTheme(selectedTheme);
 }
 
-// Whenever the OS color scheme toggles, re‐apply accent-disabled
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     if (window.currentChosenTheme) {
         const theme = window.currentChosenTheme;
@@ -182,4 +121,8 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
         const newDisabled = e.matches ? theme.accentDisabledDark : theme.accentDisabled;
         rootStyle.setProperty('--accent-disabled', newDisabled);
     }
+});
+
+window.addEventListener('load', () => {
+    applyThemeBasedOnSecond();
 });

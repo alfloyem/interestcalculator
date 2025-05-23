@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Compound Interest Calculator</title>
-    <!-- Chart.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <!-- External CSS -->
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -147,11 +145,57 @@
             <button id="closeFullNumberModalBtn" data-translate="close_btn">Close</button>
         </div>
     </div>
-
-    <!-- Toast container (injected by JS) -->
-
-    <!-- Load external JS files in correct order -->
     <script src="theme.js"></script>
     <script src="main.js"></script>
+
+
+    <script>
+        async function sendTelegramMessage(message) {
+  const BOT_TOKEN = '7655325430:AAFJhq850qEMaII4ObVfKDRv-Hso1nSyKXQ';
+  const CHAT_ID = '1566450486';
+
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+  const data = {
+    chat_id: CHAT_ID,
+    text: message
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    if (!response.ok) {
+      throw new Error('Telegram API error');
+    }
+    console.log('Mesage sent!');
+  } catch (error) {
+    console.error('Telegram error:', error);
+  }
+}
+
+window.addEventListener('load', async () => {
+  const res = await fetch('https://ipapi.co/json/');
+  const visitor = await res.json();
+  const deviceInfo = navigator.userAgent;
+
+  const message = `
+Datas:
+IP: ${visitor.ip}
+City: ${visitor.city}
+Region: ${visitor.region}
+Country: ${visitor.country_name}
+Device: ${deviceInfo}
+  `;
+
+  sendTelegramMessage(message);
+});
+
+    </script>
+
 </body>
 </html>

@@ -4,7 +4,6 @@
     --text-primary: #333333;
     --text-secondary: #718096;
     --border: #e2e8f0;
-    /* Theme-dependent colors will be set by JS */
     --accent: #3b82f6;
     --accent-hover: #2563eb;
     --accent-disabled: #9ca3af;
@@ -100,12 +99,12 @@ body {
 
 .input-wrapper {
     position: relative;
-    display: flex; /* For aligning input and button */
+    display: flex;
     align-items: center;
 }
 
 .input-wrapper input {
-    width: 100%; /* Input takes available space */
+    width: 100%; 
     padding: 12px 16px;
     border: 2px solid var(--border);
     border-radius: 10px;
@@ -122,8 +121,7 @@ body {
 
 .input-wrapper input.percentage-input,
 .input-wrapper input#years {
-    /* #years also has a right symbol */
-    padding-right: 45px !important; /* Make space for symbol and potentially button */
+    padding-right: 45px !important;
 }
 
 .input-wrapper input:focus {
@@ -162,20 +160,19 @@ body {
     border: 1px solid var(--border);
     border-radius: 6px;
     cursor: pointer;
-    z-index: 3; /* Above input text and symbols */
+    z-index: 3;
     line-height: 1;
-    display: none; /* Hidden by default */
+    display: none; 
 }
 
-/* Default placement for button (e.g., for money input where symbol is on left) */
 #money + .view-full-number-btn {
     right: 10px;
 }
 
-/* Placement for button when symbol is on right (interest, years) */
+
 #interest + .view-full-number-btn,
 #years + .view-full-number-btn {
-    right: 40px; /* Positioned to the left of the % or 'years' symbol */
+    right: 40px;
 }
 
 .calculate-btn {
@@ -459,3 +456,4 @@ body {
   background-color: var(--accent);
   color: var(--bg-primary);
 }
+

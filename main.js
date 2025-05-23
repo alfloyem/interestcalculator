@@ -1,21 +1,10 @@
-// ------------------------------------------------------
-// main.js
-//  - Uzun sayıya (15 haneli) özel “Sayıyı Gör” butonu
-//  - Dil çevirileri, input kontrolü, hesaplama, grafik vs.
-//  - theme.js’in hemen ardından yüklenmelidir.
-// ------------------------------------------------------
-
-
-/* ------------------------------------------------------
-   1) Çeviriler & Para Birimi Bilgileri
-------------------------------------------------------- */
 const translations = {
   en: {
     years_label: 'Investment Period',
     years_unit: 'years',
-    years_unit_suffix: 'years',
+    years_unit_suffix: 'years later',
     interest_label: 'Annual Interest Rate',
-    monthly_label: 'Monthly Contribution',
+    monthly_label: 'Monthly Investment',
     calculate_btn: 'Calculate Growth',
     result_title: 'Total Value After',
     contributions_title: 'Total Contributions',
@@ -28,67 +17,67 @@ const translations = {
     interest_negative_error: 'Interest rate must be at least 0.1%.',
     full_number_modal_title: 'Full Number',
     close_btn: 'Close',
-    view_full_number_label: 'View full number'
+    view_full_number_label: 'View Full Number'
   },
   tr: {
     years_label: 'Yatırım Süresi',
     years_unit: 'yıl',
     years_unit_suffix: 'yıl sonra',
     interest_label: 'Yıllık Faiz Oranı',
-    monthly_label: 'Aylık Katkı',
+    monthly_label: 'Aylık Yatırım',
     calculate_btn: 'Büyümeyi Hesapla',
-    result_title: 'Toplam Değer -',
-    contributions_title: 'Toplam Katkı',
-    interest_title: 'Kazanılan Faiz',
-    chart_title: 'Zaman İçinde Yatırım Büyümesi',
+    result_title: 'Sonrasındaki Toplam Değer',
+    contributions_title: 'Toplam Yatırım',
+    interest_title: 'Toplam Faiz Getirisi',
+    chart_title: 'Yatırımın Zaman İçindeki Büyümesi',
     total_balance: 'Toplam Bakiye',
-    total_contributions: 'Toplam Katkı',
+    total_contributions: 'Toplam Yatırım',
     year_axis: 'Yıl',
-    negative_input_error: "Lütfen 0'dan büyük veya eşit bir değer girin.",
-    interest_negative_error: 'Faiz oranı en az %0.1 olmalıdır.',
-    full_number_modal_title: 'Tam Sayı',
+    negative_input_error: 'Lütfen 0 veya daha büyük bir değer girin.',
+    interest_negative_error: 'Faiz oranı en az %0,1 olmalıdır.',
+    full_number_modal_title: 'Tam Sayı Görünümü',
     close_btn: 'Kapat',
-    view_full_number_label: 'Tam sayıyı görüntüle'
+    view_full_number_label: 'Tam Sayıyı Göster'
   },
   az: {
-    years_label: 'Investisiya Müddəti',
+    years_label: 'İnvestisiya Müddəti',
     years_unit: 'il',
-    years_unit_suffix: 'il sonra',
+    years_unit_suffix: 'ildən sonra',
     interest_label: 'İllik Faiz Dərəcəsi',
-    monthly_label: 'Aylıq Töhfə',
+    monthly_label: 'Aylıq İnvestisiya',
     calculate_btn: 'Artımı Hesabla',
-    result_title: 'Ümumi Dəyər -',
-    contributions_title: 'Ümumi Töhfə',
-    interest_title: 'Qazanılan Faiz',
-    chart_title: 'Vaxt İçində İnvestisiya Artımı',
-    total_balance: 'Ümumi Balans',
-    total_contributions: 'Ümumi Töhfə',
+    result_title: 'Sonrakı Ümumi Dəyər',
+    contributions_title: 'Cəmi İnvestisiya',
+    interest_title: 'Qazanılmış Faiz',
+    chart_title: 'Vaxtla İnvestisiyanın Artımı',
+    total_balance: 'Cəmi Balans',
+    total_contributions: 'Cəmi İnvestisiya',
     year_axis: 'İl',
-    negative_input_error: 'Zəhmət olmasa, 0-dan böyük və ya bərabər bir dəyər daxil edin.',
+    negative_input_error: 'Zəhmət olmasa, 0 və ya daha böyük bir dəyər daxil edin.',
     interest_negative_error: 'Faiz dərəcəsi ən azı 0.1% olmalıdır.',
     full_number_modal_title: 'Tam Ədəd',
     close_btn: 'Bağla',
-    view_full_number_label: 'Tam ədədi göstər'
+    view_full_number_label: 'Tam Ədədi Göstər'
   },
   ru: {
-    years_label: 'Период Инвестирования',
+    years_label: 'Срок Инвестирования',
     years_unit: 'лет',
-    years_unit_suffix: 'лет',
+    years_unit_suffix: 'лет спустя',
     interest_label: 'Годовая Процентная Ставка',
-    monthly_label: 'Ежемесячный Вклад',
+    monthly_label: 'Ежемесячная Инвестиция',
     calculate_btn: 'Рассчитать Рост',
-    result_title: 'Общая Стоимость Через',
-    contributions_title: 'Общие Взносы',
-    interest_title: 'Заработанные Проценты',
-    chart_title: 'Рост Инвестиций Во Времени',
+    result_title: 'Итоговая Сумма Через',
+    contributions_title: 'Общая Сумма Инвестиций',
+    interest_title: 'Полученные Проценты',
+    chart_title: 'Рост Инвестиций с Течением Времени',
     total_balance: 'Общий Баланс',
-    total_contributions: 'Общие Взносы',
+    total_contributions: 'Общая Инвестиция',
     year_axis: 'Год',
-    negative_input_error: 'Пожалуйста, введите значение больше или равное 0.',
-    interest_negative_error: 'Процентная ставка должна быть не менее 0.1%.',
-    full_number_modal_title: 'Полное число',
+    negative_input_error: 'Введите значение больше или равное 0.',
+    interest_negative_error: 'Ставка должна быть не менее 0.1%.',
+    full_number_modal_title: 'Полное Число',
     close_btn: 'Закрыть',
-    view_full_number_label: 'Посмотреть полное число'
+    view_full_number_label: 'Показать Полное Число'
   }
 };
 
@@ -100,9 +89,6 @@ const currencies = {
 };
 
 
-/* ------------------------------------------------------
-   2) Uluslararasılaştırma & Para Birimi Formatlama
-------------------------------------------------------- */
 let currentLanguage = 'en';
 
 function getLocale() {
@@ -119,10 +105,6 @@ function formatCurrency(amount) {
   }).format(amount);
 }
 
-
-/* ------------------------------------------------------
-   3) Dil Değiştirme İşlemleri
-------------------------------------------------------- */
 function updateLanguage() {
   document.querySelectorAll('[data-translate]').forEach(element => {
     const key = element.getAttribute('data-translate');
@@ -136,7 +118,6 @@ function updateLanguage() {
       element.setAttribute('aria-label', translations[currentLanguage][key]);
     }
   });
-  // Placeholders'ı her zaman sabit tutuyoruz
   document.getElementById('years').placeholder = '1';
   document.getElementById('interest').placeholder = '1.0';
   document.getElementById('money').placeholder = '100';
@@ -155,10 +136,6 @@ function changeLanguage() {
   }
 }
 
-
-/* ------------------------------------------------------
-   4) Ekran Altı Uyarı (Toast) İşlevi
-------------------------------------------------------- */
 function showToast(message, duration = 3000) {
   const toastElement = document.getElementById('toastNotification');
   const messageElement = document.getElementById('toastMessage');
@@ -171,10 +148,6 @@ function showToast(message, duration = 3000) {
   }, duration);
 }
 
-
-/* ------------------------------------------------------
-   5) Input Kontrolleri & “Tam Sayı Göster” Butonu
-------------------------------------------------------- */
 function isNumericString(str) {
   if (typeof str !== 'string') return false;
   return !isNaN(str) && !isNaN(parseFloat(str));
@@ -195,7 +168,6 @@ function handleNumericInput(event) {
   const inputElement = event.target;
   let value = inputElement.value;
 
-  // 12 karakteri geçmeyen bir sınır koy
   if (value.length > 12) {
     value = value.slice(0, 12);
     inputElement.value = value;
@@ -260,24 +232,9 @@ function checkInputs() {
   document.getElementById('calculateBtn').disabled = !allFilledAndValid;
 }
 
-
-/* ------------------------------------------------------
-   6) “15 Haneden Uzun” Kontrolü & Buton Oluşturma Helper’ı
-------------------------------------------------------- */
-/**
- * Bir HTML elemanına direk sayı yazmak yerine,
- * eğer hane sayısı > 15 ise <button> yerleştirir.
- * Butona tıklanınca alert() ile tam sayıyı gösterir.
- *
- * @param {HTMLElement} containerElement - Sayının yerleşeceği DOM elementi
- * @param {number|string} rawNumber - Tam sayı (örneğin 1234567890123456 gibi)
- * @param {string} formattedNumber - Çok büyük olsa bile göstermek istediğimiz formatlı metin (örn. “$1,234,567,890,123,456”)
- */
 function displayValueOrButton(containerElement, rawNumber, formattedNumber) {
-  // rawNumber’ı string olarak alıyoruz, noktalar ya da virgül varsa kaldırıyoruz:
   const rawStr = rawNumber.toString().replace(/[^0-9]/g, '');
   if (rawStr.length > 15) {
-    // 15 haneden uzunsa buton göster
     containerElement.innerHTML = '';
     const btn = document.createElement('button');
     btn.textContent = translations[currentLanguage].view_full_number_label;
@@ -287,15 +244,11 @@ function displayValueOrButton(containerElement, rawNumber, formattedNumber) {
     });
     containerElement.appendChild(btn);
   } else {
-    // Normal uzunlukta ise doğrudan metin olarak yaz
     containerElement.textContent = formattedNumber;
   }
 }
 
 
-/* ------------------------------------------------------
-   7) Hesaplama & Grafik Güncelleme
-------------------------------------------------------- */
 let chart = null;
 let isFirstCalculation = true;
 let calculateTimeout = null;
@@ -336,7 +289,6 @@ function calculate() {
   const totalContributions = monthlyContribution * 12 * years;
   const interestEarned = finalBalance - totalContributions;
 
-  // Şimdi “displayValueOrButton” ile hem raw hem formatlı sayıyı veriyoruz:
   const resultAmountEl = document.getElementById('result-amount');
   const contributionsEl = document.getElementById('total-contributions');
   const interestEl = document.getElementById('interest-earned');
@@ -349,7 +301,6 @@ function calculate() {
   displayValueOrButton(contributionsEl, Math.trunc(totalContributions), formattedContrib);
   displayValueOrButton(interestEl, Math.trunc(interestEarned), formattedInterest);
 
-  // Yıl bilgisini doğrudan koyabiliriz (ki hane sayısı asla 15’den uzun olmaz)
   document.getElementById('result-years').textContent = years;
 
   const resultSection = document.getElementById('result-section');
@@ -491,9 +442,6 @@ function updateChart(data) {
 }
 
 
-/* ------------------------------------------------------
-   8) Modal: “Tam Sayı Göster” İşlemleri
-------------------------------------------------------- */
 const fullNumberModal = document.getElementById('fullNumberModal');
 const fullNumberDisplay = document.getElementById('fullNumberDisplay');
 const closeFullNumberModalBtn = document.getElementById('closeFullNumberModalBtn');
@@ -515,29 +463,17 @@ fullNumberModal.addEventListener('click', function(event) {
 });
 
 
-/* ------------------------------------------------------
-   9) Sayfa Yüklendiğinde Yapılacaklar
-------------------------------------------------------- */
 window.addEventListener('load', function () {
-  // 1) Rastgele Tema Seç ve Uygula
   selectAndApplyRandomTheme();
 
-  // 2) İlk Dil & Para Birimi Güncellemeleri
   updateLanguage();
   updateCurrencySymbol();
-
-  // 3) Başlangıçta input kontrolü (Calculate düğmesini devre dışı bırakmak için)
   checkInputs();
-
-  // 4) Toast HTML’i ekle
   const toastHTML =
     '<div id="toastNotification" class="toast" aria-live="assertive" aria-atomic="true"><span id="toastMessage"></span></div>';
   document.body.insertAdjacentHTML('beforeend', toastHTML);
-
-  // 5) Tüm number input’lara event listener ekle
   document.querySelectorAll('input[type="number"]').forEach(inputEl => {
     inputEl.addEventListener('input', handleNumericInput);
-    // “…” butonu logic
     const viewBtn = inputEl.nextElementSibling;
     if (viewBtn && viewBtn.classList.contains('view-full-number-btn')) {
       viewBtn.addEventListener('click', function() {
@@ -548,10 +484,6 @@ window.addEventListener('load', function () {
   });
 });
 
-
-/* ------------------------------------------------------
-   10) Karanlık Mod Değişince Grafiği Yeniden Çiz
-------------------------------------------------------- */
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
   if (chart && !isFirstCalculation) {
     setTimeout(calculate, 50);
