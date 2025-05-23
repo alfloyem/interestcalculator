@@ -1,105 +1,103 @@
 const themes = [
   {
-    "name": "True Red",
-    "accent": "#DC2626",
-    "accentHover": "#B91C1C",
-    "accentDisabled": "#FCA5A5",
-    "accentDisabledDark": "#B91C1C",
-    "resultGradientFrom": "#DC2626",
-    "resultGradientTo": "#991B1B",
-    "chartLineColor": "#DC2626",
-    "chartFillColor": "rgba(220, 38, 38, 0.1)"
+    "name": "Amber Glow",
+    "accent": "#F97316",
+    "accentHover": "#EA580C",
+    "accentDisabled": "#FED7AA",
+    "accentDisabledDark": "#EA580C",
+    "resultGradientFrom": "#F97316",
+    "resultGradientTo": "#C2410C",
+    "chartLineColor": "#F97316",
+    "chartFillColor": "rgba(249, 115, 22, 0.1)"
   },
   {
-    "name": "Tomato Fire",
-    "accent": "#C03B3B",
-    "accentHover": "#9B2C2C",
-    "accentDisabled": "#FECACA",
-    "accentDisabledDark": "#EF4444",
-    "resultGradientFrom": "#C03B3B",
-    "resultGradientTo": "#7B1212",
-    "chartLineColor": "#C03B3B",
-    "chartFillColor": "rgba(192, 59, 59, 0.1)"
+    "name": "Forest Moss",
+    "accent": "#15803D",
+    "accentHover": "#166534",
+    "accentDisabled": "#BBF7D0",
+    "accentDisabledDark": "#166534",
+    "resultGradientFrom": "#15803D",
+    "resultGradientTo": "#065F46",
+    "chartLineColor": "#15803D",
+    "chartFillColor": "rgba(21, 128, 61, 0.1)"
   },
   {
-    "name": "Mint Fresh",
-    "accent": "#3EBE86",
-    "accentHover": "#2E9365",
-    "accentDisabled": "#D1FAE5",
-    "accentDisabledDark": "#6EE7B7",
-    "resultGradientFrom": "#3EBE86",
-    "resultGradientTo": "#207A51",
-    "chartLineColor": "#3EBE86",
-    "chartFillColor": "rgba(62, 190, 134, 0.1)"
-  },
-  {
-    "name": "Evergreen",
-    "accent": "#065F46",
-    "accentHover": "#064E3B",
-    "accentDisabled": "#99F6E4",
-    "accentDisabledDark": "#064E3B",
-    "resultGradientFrom": "#065F46",
-    "resultGradientTo": "#022C22",
-    "chartLineColor": "#065F46",
-    "chartFillColor": "rgba(6, 95, 70, 0.1)"
-  },
-  {
-    "name": "Sky Frost",
-    "accent": "#2C7ABF",
-    "accentHover": "#205F8F",
-    "accentDisabled": "#E0F2FE",
-    "accentDisabledDark": "#38BDF8",
-    "resultGradientFrom": "#2C7ABF",
-    "resultGradientTo": "#0B3C5E",
-    "chartLineColor": "#2C7ABF",
-    "chartFillColor": "rgba(44, 122, 191, 0.1)"
-  },
-  {
-    "name": "Deep Ocean",
-    "accent": "#1E3A8A",
-    "accentHover": "#1E40AF",
+    "name": "Midnight Indigo",
+    "accent": "#4338CA",
+    "accentHover": "#3730A3",
     "accentDisabled": "#C7D2FE",
-    "accentDisabledDark": "#1E40AF",
-    "resultGradientFrom": "#1E3A8A",
-    "resultGradientTo": "#172554",
-    "chartLineColor": "#1E3A8A",
-    "chartFillColor": "rgba(30, 58, 138, 0.1)"
+    "accentDisabledDark": "#3730A3",
+    "resultGradientFrom": "#4338CA",
+    "resultGradientTo": "#312E81",
+    "chartLineColor": "#4338CA",
+    "chartFillColor": "rgba(67, 56, 202, 0.1)"
   },
   {
-    "name": "Violet Royal",
-    "accent": "#5B3BC6",
-    "accentHover": "#472FA0",
-    "accentDisabled": "#DDD6FE",
-    "accentDisabledDark": "#7C3AED",
-    "resultGradientFrom": "#5B3BC6",
-    "resultGradientTo": "#3F27A0",
-    "chartLineColor": "#5B3BC6",
-    "chartFillColor": "rgba(91, 59, 198, 0.1)"
-  },
-  {
-    "name": "Rose Bloom",
-    "accent": "#9E1E30",
-    "accentHover": "#7A1624",
+    "name": "Sunset Coral",
+    "accent": "#FB7185",
+    "accentHover": "#F43F5E",
     "accentDisabled": "#FECDD3",
-    "accentDisabledDark": "#E11D48",
-    "resultGradientFrom": "#9E1E30",
-    "resultGradientTo": "#5A0E18",
-    "chartLineColor": "#9E1E30",
-    "chartFillColor": "rgba(158, 30, 48, 0.1)"
+    "accentDisabledDark": "#F43F5E",
+    "resultGradientFrom": "#FB7185",
+    "resultGradientTo": "#BE123C",
+    "chartLineColor": "#FB7185",
+    "chartFillColor": "rgba(251, 113, 133, 0.1)"
+  },
+  {
+    "name": "Arctic Sky",
+    "accent": "#0EA5E9",
+    "accentHover": "#0284C7",
+    "accentDisabled": "#BAE6FD",
+    "accentDisabledDark": "#0284C7",
+    "resultGradientFrom": "#0EA5E9",
+    "resultGradientTo": "#0369A1",
+    "chartLineColor": "#0EA5E9",
+    "chartFillColor": "rgba(14, 165, 233, 0.1)"
+  },
+  {
+    "name": "Golden Sand",
+    "accent": "#EAB308",
+    "accentHover": "#CA8A04",
+    "accentDisabled": "#FEF08A",
+    "accentDisabledDark": "#CA8A04",
+    "resultGradientFrom": "#EAB308",
+    "resultGradientTo": "#A16207",
+    "chartLineColor": "#EAB308",
+    "chartFillColor": "rgba(234, 179, 8, 0.1)"
+  },
+  {
+    "name": "Plum Wine",
+    "accent": "#A855F7",
+    "accentHover": "#9333EA",
+    "accentDisabled": "#E9D5FF",
+    "accentDisabledDark": "#9333EA",
+    "resultGradientFrom": "#A855F7",
+    "resultGradientTo": "#7E22CE",
+    "chartLineColor": "#A855F7",
+    "chartFillColor": "rgba(168, 85, 247, 0.1)"
+  },
+  {
+    "name": "Slate Storm",
+    "accent": "#64748B",
+    "accentHover": "#475569",
+    "accentDisabled": "#CBD5E1",
+    "accentDisabledDark": "#475569",
+    "resultGradientFrom": "#64748B",
+    "resultGradientTo": "#334155",
+    "chartLineColor": "#64748B",
+    "chartFillColor": "rgba(100, 116, 139, 0.1)"
   }
-];
+]
 
-window.currentChosenTheme = themes[0];
 
+;
 function applyTheme(theme) {
     const rootStyle = document.documentElement.style;
     rootStyle.setProperty('--accent', theme.accent);
     rootStyle.setProperty('--accent-hover', theme.accentHover);
-
     const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const disabledColor = isDark ? theme.accentDisabledDark : theme.accentDisabled;
     rootStyle.setProperty('--accent-disabled', disabledColor);
-
     rootStyle.setProperty('--result-gradient-from', theme.resultGradientFrom);
     rootStyle.setProperty('--result-gradient-to', theme.resultGradientTo);
 }
@@ -107,8 +105,7 @@ function applyTheme(theme) {
 function applyThemeBasedOnSecond() {
     const now = new Date();
     const second = now.getSeconds();
-    const themeCount = themes.length;
-    const themeIndex = second % themeCount;
+    const themeIndex = second % themes.length;
     const selectedTheme = themes[themeIndex];
     window.currentChosenTheme = selectedTheme;
     applyTheme(selectedTheme);
@@ -124,5 +121,5 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 });
 
 window.addEventListener('load', () => {
-    applyThemeBasedOnSecond();
+    applyThemeBasedOnSecond(); // veya selectAndApplyRandomTheme();
 });
